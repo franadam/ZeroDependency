@@ -18,7 +18,7 @@ module.exports = function (grunt) {
         configFile: '.stylelintrc.json',
         fix: true,
       },
-      all: ['src/components/**/*.css'],
+      all: ['src/**/*.css'],
     },
     postcss: {
       options: {
@@ -34,7 +34,12 @@ module.exports = function (grunt) {
       },
     },
     watch: {
-      files: ['Gruntfile.js', 'src/**/*.js', 'src/components/**/*.css'],
+      files: [
+        'Gruntfile.js',
+        'src/**/*.js',
+        'src/**/*.css',
+        'src/**/*.module.css',
+      ],
       tasks: ['stylelint', 'eslint'],
     },
   });

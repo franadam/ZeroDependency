@@ -1,0 +1,112 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  background-color: #222;
+  color: #fff;
+  padding: 1rem 3rem;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 10rem;
+}
+
+.logo {
+  height: 50%;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 2rem;
+}
+
+.contact {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+}
+
+.address {
+  text-align: start;
+}
+
+.cite {
+  text-align: right;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 5rem;
+}
+
+.citation {
+  width: 300px;
+}
+
+.text {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.author {
+  font-weight: lighter;
+  font-size: large;
+}
+
+.social {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2rem;
+  width: 50%;
+}
+
+.icon {
+  font-size: 2.6rem;
+}
+
+.lk {
+  color: #fff;
+}
+
+.lk:hover {
+  color: #a3a3a3;
+}
+
+@media screen and (max-width: 500px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .contact,
+  .cite,
+  .social {
+    justify-content: center;
+    flex-direction: column;
+    align-self: center;
+    text-align: center;
+  }
+
+  .cite {
+    padding-top: 1rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .social {
+    width: 100%;
+  }
+
+  .address {
+    text-align: center;
+  }
+}
