@@ -1,0 +1,23 @@
+export const FETCH_USERS = 'FETCH_USERS';
+export const USER_CREATE_PROFILE = 'USER_CREATE_PROFILE';
+export const USER_READ_PROFILE = 'USER_READ_PROFILE';
+export const USER_UPDATE_PROFILE = 'USER_UPDATE_PROFILE';
+export const USER_DELETE_PROFILE = 'USER_DELETE_PROFILE';
+
+export const FETCH_POSTS = 'FETCH_POSTS';
+export const POST_CREATE = 'POST_CREATE';
+export const POST_READ = 'POST_READ';
+export const POST_UPDATE = 'POST_UPDATE';
+export const POST_DELETE = 'POST_DELETE';
+
+export const FETCH_ALBUMS = 'FETCH_ALBUMS';
+export const ALBUM_CREATE = 'ALBUM_CREATE';
+export const ALBUM_READ = 'ALBUM_READ';
+export const ALBUM_UPDATE = 'ALBUM_UPDATE';
+export const ALBUM_DELETE = 'ALBUM_DELETE';
+
+export const ERROR_USERS = 'ERROR_USERS';
+export const ERROR_POSTS = 'ERROR_POSTS';
+export const ERROR_ALBUMS = 'ERROR_ALBUMS';
+
+export const CLEAR_ERROR = 'CLEAR_ERROR';

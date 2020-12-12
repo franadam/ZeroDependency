@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { findByTestAttr } from '../../tests/utils';
+import { findByTestAttr, storeFactory } from '../../tests/utils';
 
 import App from './App';
 
@@ -12,7 +12,9 @@ import App from './App';
  * @returns {ShallowWrapper}
  */
 const setup = (initialState = {}) => {
-  return shallow(<App {...initialState} />);
+  const store = storeFactory(initialState);
+  const wrapper = shallow(<App store={store} />);
+  return wrapper;
 };
 
 test('renders learn react link', () => {
