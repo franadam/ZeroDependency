@@ -1,0 +1,117 @@
+.main {
+  margin: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: left;
+  outline: none;
+  font-size: 1rem;
+}
+
+.active,
+.header:hover {
+  background-color: #ccc;
+}
+
+.active {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 0;
+  border: 1px solid black;
+}
+
+.content {
+  padding: 0 18px;
+  background-color: rgba(204, 204, 204, 0.5);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.content p::first-letter {
+  text-transform: uppercase;
+}
+
+.header::after {
+  content: '\002B';
+  font-size: 2rem;
+  color: black;
+  float: right;
+  margin-left: 5px;
+}
+
+.header.active::after {
+  content: "\2212";
+}
+
+.name {
+  min-width: 190px;
+  text-transform: capitalize;
+}
+
+.name svg {
+  color: rgb(42, 65, 165);
+}
+
+.post {
+  color: rgb(255, 165, 0);
+  padding: .5rem;
+}
+
+.post svg {
+  color: rgb(255, 165, 0);
+}
+
+.post:hover {
+  background-color: rgba(255, 165, 0, 0.3);
+  border-radius: 50%;
+}
+
+.album {
+  color: green;
+  padding: .5rem;
+}
+
+.album svg {
+  color: green;
+}
+
+.album:hover {
+  background-color: rgba(0, 128, 0, 0.3);
+  border-radius: 50%;
+}
+
+.completed::after {
+  content: '\2713';
+  font-size: 1.3rem;
+  color: green;
+}
+
+.uncompleted::after {
+  content: '\292B';
+  font-size: 1.3rem;
+  color: red;
+}
+
+.delete {
+  color: brown;
+  padding: .5rem;
+}
+
+.delete svg {
+  color: brown;
+}
+
+.delete:hover {
+  background-color: rgba(255, 0, 0, 0.3);
+  border-radius: 50%;
+}

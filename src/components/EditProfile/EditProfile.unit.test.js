@@ -3,24 +3,24 @@ import { shallow } from 'enzyme';
 
 import { findByTestAttr, storeFactory } from '../../tests/utils';
 
-import App from './App';
+import EditProfile from './EditProfile';
 
 /**
- * Factory function to create a ShalowWrapper for the App component.
+ * Factory function to create a ShalowWrapper for the EditProfile component.
  * @function setup
  * @param {object} props - component props specific to this setup.
  * @returns {ShallowWrapper}
  */
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
-  const wrapper = shallow(<App store={store} />);
+  const wrapper = shallow(<EditProfile store={store} />);
   return wrapper;
 };
 
-describe('render App component', () => {
-  test('should render without errors', () => {
+describe('render EditProfile component', () => {
+  test('should render without error', () => {
     let wrapper = setup();
-    const component = findByTestAttr(wrapper, 'component-app');
+    const component = findByTestAttr(wrapper, 'component-editProfile');
     expect(component.length).toBe(1);
   });
 });

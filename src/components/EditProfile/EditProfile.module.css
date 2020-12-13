@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header {
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.images {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.form {
+  align-self: center;
+}
