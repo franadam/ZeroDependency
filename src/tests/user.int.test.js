@@ -40,8 +40,6 @@ describe('users action dispatcher ', () => {
       });
     });
 
-    //console.log('expectedResponse :>> ', expectedResponse);
-
     return store.dispatch(fetchUsers()).then(() => {
       const newState = store.getState();
       const expectedState = {

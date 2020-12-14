@@ -18,7 +18,7 @@ export const fetchPosts = (state, action) => {
 
 export const createPost = (state, action) => {
   const post = action.post;
-  const posts = state.posts.splice();
+  const posts = state.posts.slice();
   posts.push(post);
   return Object.assign({}, { ...state, posts });
 };
@@ -37,7 +37,6 @@ export const updatePost = (state, action) => {
 
 export const deletePost = (state, action) => {
   const posts = state.posts.filter((u) => u.id != action.postID);
-  console.log('reducer state :>> ', state);
   return Object.assign({}, { ...state, posts });
 };
 

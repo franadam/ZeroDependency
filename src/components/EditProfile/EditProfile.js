@@ -228,10 +228,6 @@ class EditProfile extends Component {
   };
 
   componentDidMount() {
-    console.log(
-      'this.props.match.params.userID :>> ',
-      this.props.match.params.userID
-    );
     this.props.onFetchUsers();
     this.props.onReadUser(this.props.match.params.userID);
   }
@@ -331,7 +327,6 @@ class EditProfile extends Component {
 
     if (isValid) {
       const userID = this.props.match.params.userID;
-      console.log('dataToSubmit :>> ', dataToSubmit, `users/${userID}`);
       this.props.onUpdateUser(userID, dataToSubmit);
 
       this.props.history.push(`users/${userID}`);

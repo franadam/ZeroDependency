@@ -1,14 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {
-  FaTrashAlt,
-  FaUserAlt,
-  FaMapMarkerAlt,
-  FaClipboard,
-  FaImage,
-  FaFileAlt,
-} from 'react-icons/all';
+import { FaTrashAlt, FaUserAlt, FaClipboard, FaFileAlt } from 'react-icons/all';
 
 import classes from './Collapsible.module.css';
 import { Link } from 'react-router-dom';
@@ -54,9 +47,9 @@ const Collapsible = (props) => {
             <FaFileAlt /> {props.post}
           </div>
         ) : null}
-        {typeof props.album !== 'undefined' ? (
-          <div className={classes.album}>
-            <FaImage /> {props.album}
+        {typeof props.todo !== 'undefined' ? (
+          <div className={classes.todo}>
+            <FaClipboard /> {props.todo}
           </div>
         ) : null}
         {props.completed !== undefined ? (
@@ -80,9 +73,9 @@ const Collapsible = (props) => {
 Collapsible.propTypes = {
   name: propTypes.string,
   link: propTypes.string,
-  content: propTypes.array,
+  content: propTypes.object,
   post: propTypes.number,
-  album: propTypes.number,
+  todo: propTypes.number,
   type: propTypes.string,
   completed: propTypes.bool,
   delete: propTypes.func,

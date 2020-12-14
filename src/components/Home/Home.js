@@ -15,7 +15,12 @@ import {
 
 import classes from './Home.module.css';
 
-import { fetchUsers, deleteUserInfo, fetchPosts } from '../../store/actions';
+import {
+  fetchUsers,
+  deleteUserInfo,
+  fetchPosts,
+  fetchTodos,
+} from '../../store/actions';
 import Collapsible from '../Collapsible/Collapsible';
 import { Link } from 'react-router-dom';
 
@@ -23,18 +28,17 @@ export class UnconnectedHome extends Component {
   componentDidMount() {
     this.props.onFetchUsers();
     this.props.onFetchPosts();
-  }
-
-  count(posts, user) {
-    posts.filter((p) => (p.userId = user.id)).length;
+    this.props.onFetchTodos();
   }
 
   render() {
-    const { users, posts, errors, onDeleteUser } = this.props;
+    const { users, posts, todos, onDeleteUser } = this.props;
 
     const colls = users
       ? users.map((user) => {
           const userPosts = posts.filter((p) => p.userId === user.id);
+
+          const userTodos = todos.filter((p) => p.userId === user.id);
 
           const postsArr = userPosts.map((p) => (
             <div
@@ -67,7 +71,7 @@ export class UnconnectedHome extends Component {
               name={user.name}
               link={`users/${user.id}`}
               post={userPosts.length}
-              album={3}
+              todo={userTodos.length}
               type="user"
               content={content}
               delete={() => onDeleteUser(user.id)}
@@ -93,6 +97,7 @@ export class UnconnectedHome extends Component {
 const mapStateToProps = (state) => ({
   users: state.user.users,
   posts: state.post.posts,
+  todos: state.todo.todos,
   errors: state.error,
 });
 
@@ -100,14 +105,17 @@ const mapDispatchToProps = (dispatch) => ({
   onFetchUsers: () => dispatch(fetchUsers()),
   onDeleteUser: (userID) => dispatch(deleteUserInfo(userID)),
   onFetchPosts: () => dispatch(fetchPosts()),
+  onFetchTodos: () => dispatch(fetchTodos()),
 });
 
 UnconnectedHome.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object),
   posts: PropTypes.arrayOf(PropTypes.object),
+  todos: PropTypes.arrayOf(PropTypes.object),
   errors: PropTypes.object,
   onFetchUsers: PropTypes.func,
   onDeleteUser: PropTypes.func,
+  onFetchTodos: PropTypes.func,
   onFetchPosts: PropTypes.func,
 };
 

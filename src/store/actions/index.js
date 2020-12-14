@@ -1,4 +1,4 @@
-export { errorUsers, errorPosts, errorAlbums, clearError } from './error';
+export { errorUsers, errorPosts, errorTodos, clearError } from './error';
 
 export {
   fetchUsers,
@@ -9,6 +9,7 @@ export {
   fetchUserPosts,
   fetchUserAlbums,
   fetchUserTodos,
+  createUserPostSc,
   deleteUserPostSc,
   deleteUserTodo,
 } from './user';
@@ -20,3 +21,5 @@ export {
   updatePost,
   deletePost,
 } from './post';
+
+export { fetchTodos } from './todo';

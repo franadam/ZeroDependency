@@ -12,6 +12,7 @@ import {
   USER_UPDATE_PROFILE,
   USER_DELETE_PROFILE,
   POST_DELETE,
+  POST_CREATE,
   TODO_DELETE,
 } from './types';
 
@@ -38,6 +39,11 @@ export const updateUserSc = (user) => ({
 export const deleteUserSc = (userID) => ({
   type: USER_DELETE_PROFILE,
   userID,
+});
+
+export const createUserPostSc = (post) => ({
+  type: POST_CREATE,
+  post,
 });
 
 export const deleteUserPostSc = (postID) => ({
@@ -81,7 +87,6 @@ export const createUserInfo = (user) => async (dispatch) => {
       user
     );
     dispatch(createUserSc(res.data));
-    console.log('res.data :>> ', res.data);
   } catch (error) {
     dispatch(errorUsers(error));
   }
@@ -104,7 +109,6 @@ export const updateUserInfo = (userID, updates) => async (dispatch) => {
       `https://jsonplaceholder.typicode.com/users/${userID}`,
       updates
     );
-    console.log('res.data :>> ', res.data);
     dispatch(updateUserSc(res.data));
   } catch (error) {
     dispatch(errorUsers(error));
@@ -114,7 +118,6 @@ export const updateUserInfo = (userID, updates) => async (dispatch) => {
 export const deleteUserInfo = (userID) => async (dispatch) => {
   try {
     await axios.delete(`https://jsonplaceholder.typicode.com/users/${userID}`);
-    console.log('userID :>> ', userID);
     dispatch(deleteUserSc(userID));
   } catch (error) {
     dispatch(errorUsers(error));

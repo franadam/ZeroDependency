@@ -50,8 +50,7 @@ export const createPost = (post) => async (dispatch) => {
       'https://jsonplaceholder.typicode.com/posts',
       post
     );
-    dispatch(createPostSc(res.data));
-    console.log('post', post);
+    dispatch(createPostSc({ ...res.data, id: post.id }));
   } catch (error) {
     dispatch(errorPosts(error));
   }

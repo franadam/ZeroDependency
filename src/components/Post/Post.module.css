@@ -8,9 +8,14 @@
   font-family: 'Roboto';
 }
 
-.error {
+.error,
+.success {
   color: rgb(189, 25, 25);
   font-size: 1.4rem;
   text-align: center;
   margin: 0;
+}
+
+.success {
+  color: rgb(84, 124, 24);
 }

@@ -1,4 +1,4 @@
-import { CLEAR_ERROR, ERROR_USERS, ERROR_POSTS, ERROR_ALBUMS } from './types';
+import { CLEAR_ERROR, ERROR_USERS, ERROR_POSTS, ERROR_TODOS } from './types';
 
 export const errorUsers = (error) => ({
   type: ERROR_USERS,
@@ -10,8 +10,8 @@ export const errorPosts = (error) => ({
   error,
 });
 
-export const errorAlbums = (error) => ({
-  type: ERROR_ALBUMS,
+export const errorTodos = (error) => ({
+  type: ERROR_TODOS,
   error,
 });
 

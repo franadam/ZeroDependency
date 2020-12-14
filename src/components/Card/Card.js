@@ -14,9 +14,6 @@ const Card = (props) => {
           <p className={classes.body}>{props.body}</p>
         </div>
         <div className={classes.links}>
-          <Link className={classes.edit} to={props.link1}>
-            Edit
-          </Link>
           <div type="button" className={classes.delete} onClick={props.delete}>
             Delete
           </div>
@@ -29,7 +26,6 @@ const Card = (props) => {
 Card.propTypes = {
   title: propTypes.string,
   body: propTypes.string,
-  link1: propTypes.string,
   delete: propTypes.func,
 };
 

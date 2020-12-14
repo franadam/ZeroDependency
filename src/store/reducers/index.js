@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 import userReducer from './user';
 import errorReducer from './error';
 import postReducer from './post';
-//import albumReducer from './album';
+import todoReducer from './todo';
 
 const RootReducer = combineReducers({
   user: userReducer,
   post: postReducer,
-  //album: albumReducer,
+  todo: todoReducer,
   error: errorReducer,
 });
 

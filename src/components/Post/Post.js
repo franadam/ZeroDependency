@@ -10,16 +10,14 @@ import { createPost } from '../../store/actions/';
 
 import formStyle from '../FormFiled/FormField.module.css';
 import classes from './Post.module.css';
-import Modal from '../Modal/Modal';
 
 export class Post extends Component {
   state = {
     formError: false,
+    formSuccess: false,
     title: '',
     body: '',
   };
-
-  componentDidMount() {}
 
   inputHandler(event) {
     this.setState({
@@ -30,19 +28,18 @@ export class Post extends Component {
   formHandler(event) {
     event.preventDefault();
 
-    const id = uuidv4();
-
     const post = {
       userId: this.props.userID,
-      id,
+      id: uuidv4(),
       title: this.state.title,
       body: this.state.body,
     };
 
     if (this.state.title && this.state.body) {
+      this.setState({ formError: false, formSuccess: true });
       this.props.onCreatePost(post);
     } else {
-      this.setState({ formError: true });
+      this.setState({ formError: true, formSuccess: false });
       document.getElementById('modal').style.display = 'block';
     }
 
@@ -89,6 +86,8 @@ export class Post extends Component {
         </form>
         {this.state.formError ? (
           <p className={classes.error}>Please fill all fields properly</p>
+        ) : this.state.formSuccess ? (
+          <p className={classes.success}>Post added ! </p>
         ) : null}
       </div>
     );

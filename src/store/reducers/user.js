@@ -8,10 +8,11 @@ import {
   USER_UPDATE_PROFILE,
   USER_DELETE_PROFILE,
   POST_DELETE,
+  POST_CREATE,
   TODO_DELETE,
 } from '../actions/types';
 
-import { deletePost } from './post';
+import { deletePost, createPost } from './post';
 
 export const initialState = {
   users: [],
@@ -89,6 +90,8 @@ const reducer = (state = initialState, action) => {
       return deletePost(state, action);
     case TODO_DELETE:
       return deleteTodo(state, action);
+    case POST_CREATE:
+      return createPost(state, action);
     default:
       return state;
   }

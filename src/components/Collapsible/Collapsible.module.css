@@ -77,16 +77,16 @@ a.name {
   border-radius: 50%;
 }
 
-.album {
+.todo {
   color: green;
   padding: .5rem;
 }
 
-.album svg {
+.todo svg {
   color: green;
 }
 
-.album:hover {
+.todo:hover {
   background-color: rgba(0, 128, 0, 0.3);
   border-radius: 50%;
 }

@@ -34,12 +34,10 @@ export class Profile extends Component {
     this.props.onFetchUserAlbums(this.props.match.params.userID);
     this.props.onFetchUserTodos(this.props.match.params.userID);
     this.props.onFetchPosts();
-    console.log('this.props.match :>> ', this.props.match.params.userID);
   }
 
   modalHandler = () => {
     const modal = document.getElementById('modal');
-    console.log('modal :>> ', modal);
     modal.style.display = 'block';
   };
 
@@ -93,7 +91,6 @@ export class Profile extends Component {
                   key={`${post.id}_${uuidv4()}`}
                   title={post.title}
                   body={post.body}
-                  link1={`posts/${post.id}/edit`}
                   delete={() => this.props.onDeletePost(post.id)}
                 />
               ))
@@ -109,7 +106,7 @@ export class Profile extends Component {
               <Collapsible
                 key={`${todo.id}_${uuidv4()}`}
                 name={todo.title}
-                content={[<p key={`${uuidv4()}_${todo.id}`}>{todo.title}</p>]}
+                content={<p key={`${uuidv4()}_${todo.id}`}>{todo.title}</p>}
                 completed={todo.completed}
                 delete={() => this.props.onDeleteUserTodo(todo.id)}
               />

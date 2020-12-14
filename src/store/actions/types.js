@@ -13,12 +13,11 @@ export const POST_READ = 'POST_READ';
 export const POST_UPDATE = 'POST_UPDATE';
 export const POST_DELETE = 'POST_DELETE';
 
-export const FETCH_ALBUMS = 'FETCH_ALBUMS';
-
+export const FETCH_TODOS = 'FETCH_TODOS';
 export const TODO_DELETE = 'TODO_DELETE';
 
 export const ERROR_USERS = 'ERROR_USERS';
 export const ERROR_POSTS = 'ERROR_POSTS';
-export const ERROR_ALBUMS = 'ERROR_ALBUMS';
+export const ERROR_TODOS = 'ERROR_ALBUMS';
 
 export const CLEAR_ERROR = 'CLEAR_ERROR';
