@@ -37,6 +37,7 @@ export const updatePost = (state, action) => {
 
 export const deletePost = (state, action) => {
   const posts = state.posts.filter((u) => u.id != action.postID);
+  console.log('reducer state :>> ', state);
   return Object.assign({}, { ...state, posts });
 };
 

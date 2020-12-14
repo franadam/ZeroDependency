@@ -22,6 +22,7 @@ import {
   fetchUserAlbums,
   fetchUserTodos,
   deletePost,
+  fetchPosts,
 } from '../../store/actions';
 
 export class Profile extends Component {
@@ -30,6 +31,7 @@ export class Profile extends Component {
     this.props.onFetchUserPosts(this.props.match.params.userID);
     this.props.onFetchUserAlbums(this.props.match.params.userID);
     this.props.onFetchUserTodos(this.props.match.params.userID);
+    this.props.onFetchPosts();
     console.log('this.props.match :>> ', this.props.match.params.userID);
   }
 
@@ -147,6 +149,7 @@ const mapStateToProps = ({ user, error }) => ({
     onFetchUserPosts: (userID) => dispatch(fetchUserPosts(userID)),
     onFetchUserAlbums: (userID) => dispatch(fetchUserAlbums(userID)),
     onFetchUserTodos: (userID) => dispatch(fetchUserTodos(userID)),
+    onFetchPosts: () => dispatch(fetchPosts()),
     onDeletePost: (postID) => dispatch(deletePost(postID)),
   });
 
@@ -164,6 +167,7 @@ Profile.propTypes = {
   onFetchUserAlbums: PropTypes.func,
   onFetchUserTodos: PropTypes.func,
   onDeletePost: PropTypes.func,
+  onFetchPosts: PropTypes.func,
 };
 
 export default connect(

@@ -16,6 +16,18 @@
   align-items: center;
 }
 
+.collapsible__link {
+  padding: 1rem;
+  margin-top: 1rem;
+  text-transform: capitalize;
+  font-family: 'Roboto';
+  font-size: 1.3rem;
+}
+
+.collapsible__link a {
+  color: rgb(0, 157, 255);
+}
+
 .add {
   position: fixed;
   bottom: 2rem;

@@ -11,6 +11,7 @@ import {
 } from 'react-icons/all';
 
 import classes from './Collapsible.module.css';
+import { Link } from 'react-router-dom';
 
 const Collapsible = (props) => {
   const clik = (event) => {
@@ -31,13 +32,23 @@ const Collapsible = (props) => {
     return text || '';
   };
 
+  const name = (
+    <>
+      {props.type === 'user' ? <FaUserAlt /> : <FaClipboard />}{' '}
+      {textFormat(props.name)}
+    </>
+  );
+
   return (
     <div className={classes.main}>
       <div className={classes.header} onClick={(event) => clik(event)}>
-        <div className={classes.name}>
-          {props.type === 'user' ? <FaUserAlt /> : <FaClipboard />}{' '}
-          {textFormat(props.name)}
-        </div>
+        {props.link ? (
+          <Link className={classes.name} to={props.link}>
+            {name}
+          </Link>
+        ) : (
+          <div className={classes.name}>{name}</div>
+        )}
         {typeof props.post !== 'undefined' ? (
           <div className={classes.post}>
             <FaFileAlt /> {props.post}
@@ -68,6 +79,7 @@ const Collapsible = (props) => {
 
 Collapsible.propTypes = {
   name: propTypes.string,
+  link: propTypes.string,
   content: propTypes.array,
   post: propTypes.number,
   album: propTypes.number,

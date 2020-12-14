@@ -30,6 +30,9 @@ export class CreateProfile extends Component {
         validation: {
           required: true,
         },
+        valid: false,
+        validationMessage: '',
+        touched: false,
       },
       username: {
         element: 'input',
@@ -42,6 +45,9 @@ export class CreateProfile extends Component {
         validation: {
           required: true,
         },
+        valid: false,
+        validationMessage: '',
+        touched: false,
       },
       email: {
         element: 'input',
@@ -318,12 +324,13 @@ export class CreateProfile extends Component {
     let isValid = true;
 
     for (const key in formData) {
-      dataToSubmit[key] = formData[key].value;
-      isValid = isValid && formData[key].valid;
+      if (formData[key].validation.required) {
+        dataToSubmit[key] = formData[key].value;
+        isValid = isValid && formData[key].valid;
+      }
     }
 
     if (isValid) {
-      console.log('dataToSubmit :>> ', dataToSubmit);
       const id = uuidv4();
       this.props.onCreateUserProfile({ id, ...dataToSubmit });
 

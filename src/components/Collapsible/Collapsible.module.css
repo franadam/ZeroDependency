@@ -58,7 +58,8 @@
   text-transform: capitalize;
 }
 
-.name svg {
+.name svg,
+a.name {
   color: rgb(42, 65, 165);
 }
 

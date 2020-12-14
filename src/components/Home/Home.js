@@ -35,26 +35,37 @@ export class UnconnectedHome extends Component {
     const colls = users
       ? users.map((user) => {
           const userPosts = posts.filter((p) => p.userId === user.id);
-          const content = userPosts.map((p) => (
+
+          const postsArr = userPosts.map((p) => (
             <div
-              key={`${p.id}_${uuidv4()}`}
               className={classes.collapsible__content}
+              key={`${p.id}_${uuidv4()}`}
             >
-              {userPosts.length === 0 ? (
-                <p>{user.name} has not written articles yet</p>
-              ) : (
-                <>
-                  <FaFileAlt />
-                  <p>{p.title}</p>
-                </>
-              )}
+              <FaFileAlt />
+              <p>{p.title}</p>
             </div>
           ));
+
+          const content = (
+            <>
+              <div className={classes.collapsible__link}>
+                <Link to={`users/${user.id}`}>
+                  Clik here to See more on the profile
+                </Link>
+              </div>
+              {userPosts.length === 0 ? (
+                <p>{user.name} has not written any article yet</p>
+              ) : (
+                postsArr
+              )}
+            </>
+          );
 
           return (
             <Collapsible
               key={`${user.username}_${uuidv4()}`}
               name={user.name}
+              link={`users/${user.id}`}
               post={userPosts.length}
               album={3}
               type="user"
