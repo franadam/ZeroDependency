@@ -1,11 +1,46 @@
 .main {
   padding: 1rem;
+  background-color: rgba(212, 179, 195, 0.3);
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.header {
+  position: relative;
+  background-color: hsla(180, 100%, 25%, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(61, 0, 0, 0.4);
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.name {
+  margin-bottom: 0;
+  text-transform: capitalize;
+}
+
+.username {
+  color: rgb(0, 157, 255);
+  margin-top: 0;
+}
+
+.info {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.5rem;
+}
+
+.info p {
+  padding: 0 0.5rem;
+}
+
+.website,
+.website a {
+  color: rgb(0, 157, 255);
+  text-decoration: none;
 }
 
 .posts {
@@ -33,4 +68,21 @@
 .btn svg {
   color: #fff;
   font-size: 1.2rem;
+}
+
+.edit {
+  position: relative;
+  float: right;
+  bottom: 1rem;
+  padding: 1rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 4px 0 rgba(114, 50, 82, 0.4);
+  background-color: #531936;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.edit:hover {
+  cursor: pointer;
+  box-shadow: 0 8px 8px 0 rgba(122, 0, 61, 0.5);
 }

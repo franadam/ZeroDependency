@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { FaCalendarAlt, FaLink, FaMapMarkerAlt, FaPen } from 'react-icons/all';
+import {
+  FaCalendarAlt,
+  FaEdit,
+  FaLink,
+  FaMapMarkerAlt,
+  FaPen,
+} from 'react-icons/all';
 
 import Card from '../Card/Card';
 import Collapsible from '../Collapsible/Collapsible';
@@ -40,10 +46,13 @@ export class Profile extends Component {
       <div className={classes.header}>
         {currentUser !== undefined ? (
           <>
-            <h1>{currentUser.name}</h1>
-            <div className={classes.infos}>
-              <p className={classes.info__username}>@{currentUser.username}</p>
-              <div className={classes.place}>
+            <h1 className={classes.name}>{currentUser.name}</h1>
+            <Link to={`${userID}/edit`} className={classes.edit}>
+              <FaPen />
+            </Link>
+            <p className={classes.username}>@{currentUser.username}</p>
+            <div className={classes.info}>
+              <div className={classes.info}>
                 {currentUser.address ? (
                   <p>
                     <FaMapMarkerAlt /> {currentUser.address.city}
@@ -54,7 +63,7 @@ export class Profile extends Component {
                     Company: {currentUser.company.name}
                   </p>
                 ) : null}
-                <p>
+                <p className={classes.website}>
                   <FaLink />{' '}
                   <a
                     href={currentUser.website}
@@ -80,7 +89,7 @@ export class Profile extends Component {
                   key={post.id}
                   title={post.title}
                   body={post.body}
-                  link1={'#'}
+                  link1={`posts/${post.id}/edit`}
                   delete={() => this.props.onDeletePost(post.id)}
                 />
               ))
@@ -117,7 +126,7 @@ export class Profile extends Component {
             type="button"
             onClick={() => this.modalHandler()}
           >
-            <FaPen />
+            <FaEdit />
           </button>
         </div>
       </div>

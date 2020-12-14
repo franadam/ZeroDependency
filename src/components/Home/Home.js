@@ -10,12 +10,14 @@ import {
   FaImage,
   FaPen,
   FaFileAlt,
+  FaUser,
 } from 'react-icons/all';
 
 import classes from './Home.module.css';
 
 import { fetchUsers, deleteUserInfo, fetchPosts } from '../../store/actions';
 import Collapsible from '../Collapsible/Collapsible';
+import { Link } from 'react-router-dom';
 
 export class UnconnectedHome extends Component {
   componentDidMount() {
@@ -33,12 +35,6 @@ export class UnconnectedHome extends Component {
     const colls = users
       ? users.map((user) => {
           const userPosts = posts.filter((p) => p.userId === user.id);
-
-          console.log(
-            'userPosts.length === 0  :>> ',
-            user.name,
-            userPosts.length === 0
-          );
           const content = userPosts.map((p) => (
             <div
               key={`${p.id}_${uuidv4()}`}
@@ -74,6 +70,9 @@ export class UnconnectedHome extends Component {
         <div className={classes.wrapper}>
           <h1>Users</h1>
           {colls}
+          <Link to={`users/add`} className={classes.add}>
+            <FaUser />
+          </Link>
         </div>
       </div>
     );

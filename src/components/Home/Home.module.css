@@ -15,3 +15,24 @@
   justify-content: flex-start;
   align-items: center;
 }
+
+.add {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 4px 0 rgba(61, 0, 0, 0.4);
+  background-color: red;
+  border: none;
+}
+
+.add:hover {
+  cursor: pointer;
+  box-shadow: 0 8px 8px 0 rgba(85, 0, 0, 0.5);
+}
+
+.add svg {
+  color: #fff;
+  font-size: 1.2rem;
+}
