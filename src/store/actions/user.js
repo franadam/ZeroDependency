@@ -69,6 +69,7 @@ export const createUserInfo = (user) => async (dispatch) => {
       user
     );
     dispatch(createUserSc(res.data));
+    console.log('res.data :>> ', res.data);
   } catch (error) {
     dispatch(errorUsers(error));
   }
@@ -79,7 +80,6 @@ export const readUserInfo = (userID) => async (dispatch) => {
     const res = await axios.get(
       `https://jsonplaceholder.typicode.com/users/${userID}`
     );
-    console.log('res.data :>> ', res);
     dispatch(readUserSc(res.data));
   } catch (error) {
     dispatch(errorUsers(error));
@@ -92,6 +92,7 @@ export const updateUserInfo = (userID, updates) => async (dispatch) => {
       `https://jsonplaceholder.typicode.com/users/${userID}`,
       updates
     );
+    console.log('res.data :>> ', res.data);
     dispatch(updateUserSc(res.data));
   } catch (error) {
     dispatch(errorUsers(error));

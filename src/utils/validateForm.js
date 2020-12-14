@@ -16,6 +16,11 @@ const validate = (element) => {
       }`;
     error = !valid ? [valid, message] : error;
   }
+  if (element.config.name === 'phone_number') {
+    const valid = validator.isMobilePhone(element.value),
+      message = `${!valid ? 'Please enter a valid phone number' : ''}`;
+    error = !valid ? [valid, message] : error;
+  }
 
   return error;
 };

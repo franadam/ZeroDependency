@@ -25,10 +25,10 @@ const Collapsible = (props) => {
   };
 
   const textFormat = (text) => {
-    if (text.length > 20) {
+    if (text && text.length > 20) {
       return text.slice(0, 20) + '...';
     }
-    return text;
+    return text || '';
   };
 
   return (
@@ -38,12 +38,12 @@ const Collapsible = (props) => {
           {props.type === 'user' ? <FaUserAlt /> : <FaClipboard />}{' '}
           {textFormat(props.name)}
         </div>
-        {props.post ? (
+        {typeof props.post !== 'undefined' ? (
           <div className={classes.post}>
             <FaFileAlt /> {props.post}
           </div>
         ) : null}
-        {props.album ? (
+        {typeof props.album !== 'undefined' ? (
           <div className={classes.album}>
             <FaImage /> {props.album}
           </div>
@@ -61,16 +61,14 @@ const Collapsible = (props) => {
           <FaTrashAlt />
         </div>
       </div>
-      <div className={classes.content}>
-        <p>{props.content}</p>
-      </div>
+      <div className={classes.content}>{props.content}</div>
     </div>
   );
 };
 
 Collapsible.propTypes = {
   name: propTypes.string,
-  content: propTypes.string,
+  content: propTypes.array,
   post: propTypes.number,
   album: propTypes.number,
   type: propTypes.string,

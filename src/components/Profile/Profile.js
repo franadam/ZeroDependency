@@ -96,7 +96,7 @@ export class Profile extends Component {
               <Collapsible
                 key={todo.id}
                 name={todo.title}
-                content={todo.title}
+                content={[todo.title]}
                 completed={todo.completed}
               />
             ))

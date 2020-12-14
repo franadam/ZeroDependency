@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types';
+
+import { v4 as uuidv4 } from 'uuid';
 
 import { createPost } from '../../store/actions/';
 
-import classes from '../FormFiled/FormField.module.css';
+import formStyle from '../FormFiled/FormField.module.css';
+import classes from './Post.module.css';
+import Modal from '../Modal/Modal';
 
 export class Post extends Component {
   state = {
+    formError: false,
     title: '',
     body: '',
   };
@@ -24,14 +30,21 @@ export class Post extends Component {
   formHandler(event) {
     event.preventDefault();
 
+    const id = uuidv4();
+
     const post = {
       userId: this.props.userID,
-      id: 9999,
+      id,
       title: this.state.title,
       body: this.state.body,
     };
 
-    this.props.onCreatePost(post);
+    if (this.state.title && this.state.body) {
+      this.props.onCreatePost(post);
+    } else {
+      this.setState({ formError: true });
+      document.getElementById('modal').style.display = 'block';
+    }
 
     this.setState({
       title: '',
@@ -41,35 +54,42 @@ export class Post extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Create a Post</h1>
+      <div className={classes.main}>
+        <h1 className={classes.title}>Create a Post</h1>
         <form onSubmit={this.formHandler}>
-          <div>
-            <label>Title</label>
+          <div className={formStyle.main}>
+            <label className={formStyle.label}>Title</label>
             <input
               id="title"
-              className={classes.fInput}
+              className={formStyle.fInput}
               name="title"
               type="text"
               onChange={(event) => this.inputHandler(event)}
               value={this.state.title}
             />
           </div>
-          <div>
-            <label>Body</label>
+          <div className={formStyle.main}>
+            <label className={formStyle.label}>Body</label>
             <textarea
               id="body"
-              className={classes.fInput}
+              className={formStyle.fInput}
               name="body"
               type="text"
               onChange={(event) => this.inputHandler(event)}
               value={this.state.body}
             />
           </div>
-          <button type="submit" onClick={(event) => this.formHandler(event)}>
+          <button
+            className={`${formStyle.btn}`}
+            type="submit"
+            onClick={(event) => this.formHandler(event)}
+          >
             Submit
           </button>
         </form>
+        {this.state.formError ? (
+          <p className={classes.error}>Please fill all fields properly</p>
+        ) : null}
       </div>
     );
   }

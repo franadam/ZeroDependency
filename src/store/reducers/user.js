@@ -21,9 +21,9 @@ export const fetchUsers = (state, action) => {
 
 export const createUserInfo = (state, action) => {
   const user = action.user;
-  const users = state.users.splice();
+  const users = state.users.slice();
   users.push(user);
-  return Object.assign({}, { ...state, users });
+  return Object.assign({}, { ...state, users, user });
 };
 
 export const readUserInfo = (state, action) => {
@@ -32,7 +32,7 @@ export const readUserInfo = (state, action) => {
 };
 
 export const updateUserInfo = (state, action) => {
-  const users = state.users.filter((u) => u.id != action.userID);
+  const users = state.users.filter((u) => u.id != action.user.id);
   const user = action.user;
   users.push(user);
   return Object.assign({}, { ...state, users });

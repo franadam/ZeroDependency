@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
+
+import { createUserInfo, fetchUsers } from '../../store/actions';
+
+import validate from '../../utils/validateForm';
 
 import FormField from '../FormFiled/FormField';
 import formStyle from '../FormFiled/FormField.module.css';
-import classes from '../CreateProfile/CreateProfile.module.css';
-
-import validate from '../../utils/validateForm';
-import { fetchUsers, updateUserInfo, readUserInfo } from '../../store/actions';
+import classes from './CreateProfile.module.css';
 import Modal from '../Modal/Modal';
 
-class EditProfile extends Component {
+export class CreateProfile extends Component {
   state = {
     formError: false,
     formSuccess: '',
@@ -26,7 +28,7 @@ class EditProfile extends Component {
           placeholder: 'Enter your fullname',
         },
         validation: {
-          required: false,
+          required: true,
         },
       },
       username: {
@@ -38,7 +40,7 @@ class EditProfile extends Component {
           placeholder: 'Enter your username',
         },
         validation: {
-          required: false,
+          required: true,
         },
       },
       email: {
@@ -50,7 +52,7 @@ class EditProfile extends Component {
           placeholder: 'Enter your email',
         },
         validation: {
-          required: false,
+          required: true,
           email: true,
         },
         valid: false,
@@ -66,7 +68,7 @@ class EditProfile extends Component {
           placeholder: 'Enter your street',
         },
         validation: {
-          required: false,
+          required: true,
         },
         valid: false,
         validationMessage: '',
@@ -82,7 +84,7 @@ class EditProfile extends Component {
           placeholder: 'Enter your house number',
         },
         validation: {
-          required: false,
+          required: true,
         },
         valid: false,
         validationMessage: '',
@@ -97,7 +99,7 @@ class EditProfile extends Component {
           placeholder: 'Enter your city',
         },
         validation: {
-          required: false,
+          required: true,
         },
         valid: false,
         validationMessage: '',
@@ -113,7 +115,7 @@ class EditProfile extends Component {
           placeholder: 'Enter your postal code',
         },
         validation: {
-          required: false,
+          required: true,
         },
         valid: false,
         validationMessage: '',
@@ -158,7 +160,7 @@ class EditProfile extends Component {
           placeholder: 'Enter your phone number',
         },
         validation: {
-          required: false,
+          required: true,
         },
         valid: false,
         validationMessage: '',
@@ -188,7 +190,7 @@ class EditProfile extends Component {
           placeholder: 'Enter your company name',
         },
         validation: {
-          required: false,
+          required: true,
         },
         valid: false,
         validationMessage: '',
@@ -227,14 +229,7 @@ class EditProfile extends Component {
     },
   };
 
-  componentDidMount() {
-    console.log(
-      'this.props.match.params.userID :>> ',
-      this.props.match.params.userID
-    );
-    this.props.onFetchUsers();
-    this.props.onReadUser(this.props.match.params.userID);
-  }
+  componentDidMount() {}
 
   createForm(formData) {
     const formElementsArray = [];
@@ -323,26 +318,23 @@ class EditProfile extends Component {
     let isValid = true;
 
     for (const key in formData) {
-      if (formData[key].value) {
-        dataToSubmit[key] = formData[key].value;
-        isValid = isValid && formData[key].valid;
-      }
+      dataToSubmit[key] = formData[key].value;
+      isValid = isValid && formData[key].valid;
     }
 
     if (isValid) {
-      const userID = this.props.match.params.userID;
-      console.log('dataToSubmit :>> ', dataToSubmit, `users/${userID}`);
-      this.props.onUpdateUser(userID, dataToSubmit);
+      console.log('dataToSubmit :>> ', dataToSubmit);
+      const id = uuidv4();
+      this.props.onCreateUserProfile({ id, ...dataToSubmit });
 
-      this.props.history.push(`users/${userID}`);
+      this.props.history.push(`users/${id}`);
     } else {
       this.setState({ formError: true });
       document.getElementById('modal').style.display = 'block';
     }
   }
   render() {
-    const { match, users } = this.props;
-    const user = users.find((user) => user.id == match.params.userID);
+    const { userID } = this.props.match.params;
     const form = (
       <form className={formStyle.form} onSubmit={this.handleSubmit}>
         {this.createForm(this.state.formData)}
@@ -351,23 +343,19 @@ class EditProfile extends Component {
           onClick={(event) => this.handleSubmit(event)}
           type="submit"
         >
-          UPDATE
+          CREATE
         </button>
       </form>
     );
 
     return (
-      <div data-test="component-editProfile" className={classes.main}>
+      <div className={classes.main}>
         <div className={classes.wrapper}>
-          <h1 className={classes.title}>
-            Edit {user ? user.name : ''} Profile
-          </h1>
-          <div className={classes.form}>{form}</div>
+          <h1 className={classes.title}>Create profile</h1>
+          {form}
           <Modal>
             {this.state.formError ? (
-              <p className={classes.error}>
-                Please fill the updated fields properly
-              </p>
+              <p className={classes.error}>Please fill all fields properly</p>
             ) : null}
           </Modal>
         </div>
@@ -376,31 +364,27 @@ class EditProfile extends Component {
   }
 }
 
-const mapStateToProps = ({ error, user }) => ({
-  users: user.users,
-  currentUser: user.user,
-  error: error.user,
+const mapStateToProps = (state) => ({
+  errors: state.error,
+  user: state.user.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onFetchUsers: () => dispatch(fetchUsers()),
-  onReadUser: (id) => dispatch(readUserInfo(id)),
-  onUpdateUser: (id, user) => dispatch(updateUserInfo(id, user)),
+  onFetchUsers: (user) => dispatch(fetchUsers(user)),
+  onCreateUserProfile: (user) => dispatch(createUserInfo(user)),
 });
 
-EditProfile.propTypes = {
-  error: PropTypes.object,
+CreateProfile.propTypes = {
+  errors: PropTypes.object,
+  user: PropTypes.object,
   history: PropTypes.object,
   match: PropTypes.object,
-  currentUser: PropTypes.object,
   userID: PropTypes.string,
-  users: PropTypes.arrayOf(PropTypes.object),
+  onCreateUserProfile: PropTypes.func,
   onFetchUsers: PropTypes.func,
-  onReadUser: PropTypes.func,
-  onUpdateUser: PropTypes.func,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(EditProfile));
+)(withRouter(CreateProfile));

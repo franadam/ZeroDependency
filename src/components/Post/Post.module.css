@@ -1,0 +1,16 @@
+.main {
+  padding: 0 1rem;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Roboto';
+}
+
+.error {
+  color: rgb(189, 25, 25);
+  font-size: 1.4rem;
+  text-align: center;
+  margin: 0;
+}

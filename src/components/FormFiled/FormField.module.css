@@ -1,16 +1,40 @@
 .main {
-  text-align: center;
+  margin: 1rem 0;
+  display: flex;
+  border-radius: 5px;
 }
 
-.fInput {
-  padding: .5rem;
-  color: #01285e;
+.main.empty {
+  border-bottom: 2px solid #f00;
+}
+
+.field {
+  text-align: center;
+  width: 100%;
+  max-width: 30rem;
+}
+
+.label {
+  padding: 0.5rem;
+  color: #400;
+  text-transform: capitalize;
+  min-width: 14rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.fInput,
+input {
+  padding: 1rem;
+  color: #ffbadc;
   display: block;
   width: 100%;
-  box-shadow: 0 0 8px hsla(222, 100%, 18%, .7) inset;
+  box-shadow: 0 0 10px hsla(180, 100%, 8%, 1) inset;
   border: none;
   border-radius: 5px;
-  background-color: #dff1ff;
+  background-color: #005e5e;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .fInput::placeholder {
@@ -23,8 +47,9 @@
   font-style: italic;
 }
 
-.empty {
+.empty > input {
   background-color: rgb(255, 221, 221);
+  color: red;
 }
 
 .empty::placeholder {
@@ -33,4 +58,28 @@
 
 .show_password_label {
   display: flex;
+}
+
+.btn {
+  width: fit-content;
+  margin: 1rem 0;
+  padding: .5rem;
+  color: aliceblue;
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: #400;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px hsla(180, 100%, 8%, 1);
+  outline: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ffbadc;
+  color: #400;
+}
+
+.submit {
+  float: right;
 }

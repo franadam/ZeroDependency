@@ -9,3 +9,9 @@
   flex-direction: column;
   width: 100%;
 }
+
+.collapsible__content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

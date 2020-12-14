@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   FaCalendarAlt,
@@ -8,6 +9,7 @@ import {
   FaMapMarkerAlt,
   FaImage,
   FaPen,
+  FaFileAlt,
 } from 'react-icons/all';
 
 import classes from './Home.module.css';
@@ -30,17 +32,37 @@ export class UnconnectedHome extends Component {
 
     const colls = users
       ? users.map((user) => {
-          const userPostCount = posts.filter((p) => p.userId === user.id)
-            .length;
+          const userPosts = posts.filter((p) => p.userId === user.id);
+
+          console.log(
+            'userPosts.length === 0  :>> ',
+            user.name,
+            userPosts.length === 0
+          );
+          const content = userPosts.map((p) => (
+            <div
+              key={`${p.id}_${uuidv4()}`}
+              className={classes.collapsible__content}
+            >
+              {userPosts.length === 0 ? (
+                <p>{user.name} has not written articles yet</p>
+              ) : (
+                <>
+                  <FaFileAlt />
+                  <p>{p.title}</p>
+                </>
+              )}
+            </div>
+          ));
 
           return (
             <Collapsible
-              key={user.username}
+              key={`${user.username}_${uuidv4()}`}
               name={user.name}
-              post={userPostCount}
+              post={userPosts.length}
               album={3}
               type="user"
-              content={user.company.name}
+              content={content}
               delete={() => onDeleteUser(user.id)}
             />
           );
