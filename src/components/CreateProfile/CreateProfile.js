@@ -11,7 +11,7 @@ import validate from '../../utils/validateForm';
 import FormField from '../FormFiled/FormField';
 import formStyle from '../FormFiled/FormField.module.css';
 import classes from './CreateProfile.module.css';
-import Modal from '../Modal/Modal';
+import Modal from '../../hoc/Modal/Modal';
 
 export class CreateProfile extends Component {
   state = {
@@ -341,7 +341,6 @@ export class CreateProfile extends Component {
     }
   }
   render() {
-    const { userID } = this.props.match.params;
     const form = (
       <form className={formStyle.form} onSubmit={this.handleSubmit}>
         {this.createForm(this.state.formData)}

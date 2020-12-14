@@ -9,7 +9,7 @@ import classes from '../CreateProfile/CreateProfile.module.css';
 
 import validate from '../../utils/validateForm';
 import { fetchUsers, updateUserInfo, readUserInfo } from '../../store/actions';
-import Modal from '../Modal/Modal';
+import Modal from '../../hoc/Modal/Modal';
 
 class EditProfile extends Component {
   state = {

@@ -16,12 +16,12 @@ const Navbar = () => {
         </Link>
         <ul id="nav-mobile" className={classes.links}>
           <li>
-            <Link className={classes.lk} to="users/add">
+            <Link className={classes.lk} to="/users/add">
               Add Users
             </Link>
           </li>
           <li>
-            <Link className={classes.lk} to="posts/compose">
+            <Link className={classes.lk} to="/posts/compose">
               Add Posts
             </Link>
           </li>

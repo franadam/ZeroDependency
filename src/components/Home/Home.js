@@ -3,15 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
-import {
-  FaCalendarAlt,
-  FaLink,
-  FaMapMarkerAlt,
-  FaImage,
-  FaPen,
-  FaFileAlt,
-  FaUser,
-} from 'react-icons/all';
+import { FaFileAlt, FaUser } from 'react-icons/all';
 
 import classes from './Home.module.css';
 
