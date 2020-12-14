@@ -14,10 +14,8 @@ export const POST_UPDATE = 'POST_UPDATE';
 export const POST_DELETE = 'POST_DELETE';
 
 export const FETCH_ALBUMS = 'FETCH_ALBUMS';
-export const ALBUM_CREATE = 'ALBUM_CREATE';
-export const ALBUM_READ = 'ALBUM_READ';
-export const ALBUM_UPDATE = 'ALBUM_UPDATE';
-export const ALBUM_DELETE = 'ALBUM_DELETE';
+
+export const TODO_DELETE = 'TODO_DELETE';
 
 export const ERROR_USERS = 'ERROR_USERS';
 export const ERROR_POSTS = 'ERROR_POSTS';

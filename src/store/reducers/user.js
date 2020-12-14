@@ -7,7 +7,11 @@ import {
   USER_READ_PROFILE,
   USER_UPDATE_PROFILE,
   USER_DELETE_PROFILE,
+  POST_DELETE,
+  TODO_DELETE,
 } from '../actions/types';
+
+import { deletePost } from './post';
 
 export const initialState = {
   users: [],
@@ -58,6 +62,11 @@ export const fetchUserTodos = (state, action) => {
   return Object.assign({}, { ...state, todos });
 };
 
+export const deleteTodo = (state, action) => {
+  const todos = state.todos.filter((u) => u.id != action.todoID);
+  return Object.assign({}, { ...state, todos });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_USERS:
@@ -76,6 +85,10 @@ const reducer = (state = initialState, action) => {
       return updateUserInfo(state, action);
     case USER_DELETE_PROFILE:
       return deleteUserInfo(state, action);
+    case POST_DELETE:
+      return deletePost(state, action);
+    case TODO_DELETE:
+      return deleteTodo(state, action);
     default:
       return state;
   }

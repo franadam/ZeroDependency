@@ -9,6 +9,8 @@ export {
   fetchUserPosts,
   fetchUserAlbums,
   fetchUserTodos,
+  deleteUserPostSc,
+  deleteUserTodo,
 } from './user';
 
 export {

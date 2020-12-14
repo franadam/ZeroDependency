@@ -79,7 +79,7 @@ export class UnconnectedHome extends Component {
     return (
       <div data-test="component-home" className={classes.main}>
         <div className={classes.wrapper}>
-          <h1>Users</h1>
+          <h1 className={classes.title}>Users</h1>
           {colls}
           <Link to={`users/add`} className={classes.add}>
             <FaUser />

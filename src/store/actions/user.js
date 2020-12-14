@@ -11,6 +11,8 @@ import {
   USER_READ_PROFILE,
   USER_UPDATE_PROFILE,
   USER_DELETE_PROFILE,
+  POST_DELETE,
+  TODO_DELETE,
 } from './types';
 
 export const getUsers = (users) => ({
@@ -36,6 +38,16 @@ export const updateUserSc = (user) => ({
 export const deleteUserSc = (userID) => ({
   type: USER_DELETE_PROFILE,
   userID,
+});
+
+export const deleteUserPostSc = (postID) => ({
+  type: POST_DELETE,
+  postID,
+});
+
+export const deleteUserTodoSc = (todoID) => ({
+  type: TODO_DELETE,
+  todoID,
 });
 
 export const getPostsSc = (posts) => ({
@@ -137,6 +149,15 @@ export const fetchUserAlbums = (userID) => async (dispatch) => {
       `https://jsonplaceholder.typicode.com/albums?userId=${userID}`
     );
     dispatch(getAlbumsSc(res.data));
+  } catch (error) {
+    dispatch(errorUsers(error));
+  }
+};
+
+export const deleteUserTodo = (todoID) => async (dispatch) => {
+  try {
+    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${todoID}`);
+    dispatch(deleteUserTodoSc(todoID));
   } catch (error) {
     dispatch(errorUsers(error));
   }

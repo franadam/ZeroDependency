@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import {
   FaCalendarAlt,
   FaEdit,
@@ -23,6 +24,7 @@ import {
   fetchUserTodos,
   deletePost,
   fetchPosts,
+  deleteUserTodo,
 } from '../../store/actions';
 
 export class Profile extends Component {
@@ -88,7 +90,7 @@ export class Profile extends Component {
           {posts != undefined
             ? posts.map((post) => (
                 <Card
-                  key={post.id}
+                  key={`${post.id}_${uuidv4()}`}
                   title={post.title}
                   body={post.body}
                   link1={`posts/${post.id}/edit`}
@@ -105,10 +107,11 @@ export class Profile extends Component {
         {todos != undefined
           ? todos.map((todo) => (
               <Collapsible
-                key={todo.id}
+                key={`${todo.id}_${uuidv4()}`}
                 name={todo.title}
-                content={[todo.title]}
+                content={[<p key={`${uuidv4()}_${todo.id}`}>{todo.title}</p>]}
                 completed={todo.completed}
+                delete={() => this.props.onDeleteUserTodo(todo.id)}
               />
             ))
           : []}
@@ -151,6 +154,7 @@ const mapStateToProps = ({ user, error }) => ({
     onFetchUserTodos: (userID) => dispatch(fetchUserTodos(userID)),
     onFetchPosts: () => dispatch(fetchPosts()),
     onDeletePost: (postID) => dispatch(deletePost(postID)),
+    onDeleteUserTodo: (userID) => dispatch(deleteUserTodo(userID)),
   });
 
 Profile.propTypes = {
@@ -168,6 +172,7 @@ Profile.propTypes = {
   onFetchUserTodos: PropTypes.func,
   onDeletePost: PropTypes.func,
   onFetchPosts: PropTypes.func,
+  onDeleteUserTodo: PropTypes.func,
 };
 
 export default connect(
