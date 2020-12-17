@@ -18,7 +18,7 @@ const reducer = (state = initialState, { type, error }) => {
     case ERROR_USERS:
       return Object.assign({}, { ...state, users: error });
     case ERROR_POSTS:
-      return Object.assign({}, { ...state, tweets: error });
+      return Object.assign({}, { ...state, posts: error });
     case ERROR_TODOS:
       return Object.assign({}, { ...state, likes: error });
     case CLEAR_ERROR:

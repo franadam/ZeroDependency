@@ -29,7 +29,7 @@ export class Post extends Component {
     event.preventDefault();
 
     const post = {
-      userId: this.props.userID,
+      userId: parseInt(this.props.userID),
       id: uuidv4(),
       title: this.state.title,
       body: this.state.body,

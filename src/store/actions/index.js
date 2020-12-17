@@ -6,12 +6,6 @@ export {
   readUserInfo,
   updateUserInfo,
   deleteUserInfo,
-  fetchUserPosts,
-  fetchUserAlbums,
-  fetchUserTodos,
-  createUserPostSc,
-  deleteUserPostSc,
-  deleteUserTodo,
 } from './user';
 
 export {
@@ -22,4 +16,4 @@ export {
   deletePost,
 } from './post';
 
-export { fetchTodos } from './todo';
+export { fetchTodos, deleteTodo } from './todo';

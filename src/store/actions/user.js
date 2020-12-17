@@ -4,16 +4,10 @@ import { errorUsers } from './';
 
 import {
   FETCH_USERS,
-  FETCH_USER_POSTS,
-  FETCH_USER_ALBUMS,
-  FETCH_USER_TODOS,
   USER_CREATE_PROFILE,
   USER_READ_PROFILE,
   USER_UPDATE_PROFILE,
   USER_DELETE_PROFILE,
-  POST_DELETE,
-  POST_CREATE,
-  TODO_DELETE,
 } from './types';
 
 export const getUsers = (users) => ({
@@ -39,36 +33,6 @@ export const updateUserSc = (user) => ({
 export const deleteUserSc = (userID) => ({
   type: USER_DELETE_PROFILE,
   userID,
-});
-
-export const createUserPostSc = (post) => ({
-  type: POST_CREATE,
-  post,
-});
-
-export const deleteUserPostSc = (postID) => ({
-  type: POST_DELETE,
-  postID,
-});
-
-export const deleteUserTodoSc = (todoID) => ({
-  type: TODO_DELETE,
-  todoID,
-});
-
-export const getPostsSc = (posts) => ({
-  type: FETCH_USER_POSTS,
-  posts,
-});
-
-export const getAlbumsSc = (albums) => ({
-  type: FETCH_USER_ALBUMS,
-  albums,
-});
-
-export const getTodosSc = (todos) => ({
-  type: FETCH_USER_TODOS,
-  todos,
 });
 
 export const fetchUsers = () => async (dispatch) => {
@@ -119,48 +83,6 @@ export const deleteUserInfo = (userID) => async (dispatch) => {
   try {
     await axios.delete(`https://jsonplaceholder.typicode.com/users/${userID}`);
     dispatch(deleteUserSc(userID));
-  } catch (error) {
-    dispatch(errorUsers(error));
-  }
-};
-
-export const fetchUserPosts = (userID) => async (dispatch) => {
-  try {
-    const res = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts?userId=${userID}`
-    );
-    dispatch(getPostsSc(res.data));
-  } catch (error) {
-    dispatch(errorUsers(error));
-  }
-};
-
-export const fetchUserTodos = (userID) => async (dispatch) => {
-  try {
-    const res = await axios.get(
-      `https://jsonplaceholder.typicode.com/todos?userId=${userID}`
-    );
-    dispatch(getTodosSc(res.data));
-  } catch (error) {
-    dispatch(errorUsers(error));
-  }
-};
-
-export const fetchUserAlbums = (userID) => async (dispatch) => {
-  try {
-    const res = await axios.get(
-      `https://jsonplaceholder.typicode.com/albums?userId=${userID}`
-    );
-    dispatch(getAlbumsSc(res.data));
-  } catch (error) {
-    dispatch(errorUsers(error));
-  }
-};
-
-export const deleteUserTodo = (todoID) => async (dispatch) => {
-  try {
-    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${todoID}`);
-    dispatch(deleteUserTodoSc(todoID));
   } catch (error) {
     dispatch(errorUsers(error));
   }

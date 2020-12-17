@@ -11,22 +11,21 @@ import Modal from '../../hoc/Modal/Modal';
 import Post from '../Post/Post';
 
 import classes from './Profile.module.css';
+
+import { objectToArray } from '../../utils/stateTransforation';
+
 import {
-  readUserInfo,
-  fetchUserPosts,
-  fetchUserAlbums,
-  fetchUserTodos,
   deletePost,
   fetchPosts,
-  deleteUserTodo,
+  deleteTodo,
+  fetchUsers,
+  fetchTodos,
 } from '../../store/actions';
 
 export class Profile extends Component {
   componentDidMount() {
-    this.props.onReadUser(this.props.match.params.userID);
-    this.props.onFetchUserPosts(this.props.match.params.userID);
-    this.props.onFetchUserAlbums(this.props.match.params.userID);
-    this.props.onFetchUserTodos(this.props.match.params.userID);
+    this.props.onFetchTodos();
+    this.props.onFetchUsers();
     this.props.onFetchPosts();
   }
 
@@ -36,8 +35,13 @@ export class Profile extends Component {
   };
 
   render() {
-    const { currentUser, posts, todos, match } = this.props;
+    const { user, post, todo, match } = this.props;
     const userID = match.params.userID;
+
+    const currentUser = user.byId[userID];
+    const userPosts = objectToArray(userID, post);
+    const userTodos = objectToArray(userID, todo);
+
     const infosJX = (
       <div className={classes.header}>
         {currentUser !== undefined ? (
@@ -79,33 +83,29 @@ export class Profile extends Component {
       <div>
         <h2>Posts</h2>
         <div className={classes.posts}>
-          {posts != undefined
-            ? posts.map((post) => (
-                <Card
-                  key={`${post.id}_${uuidv4()}`}
-                  title={post.title}
-                  body={post.body}
-                  delete={() => this.props.onDeletePost(post.id)}
-                />
-              ))
-            : []}
+          {userPosts.map((post) => (
+            <Card
+              key={`${post.id}_${uuidv4()}`}
+              title={post.title}
+              body={post.body}
+              delete={() => this.props.onDeletePost(post.id)}
+            />
+          ))}
         </div>
       </div>
     );
     const todosJX = (
       <div className={classes.albums}>
         <h2>Todos</h2>
-        {todos != undefined
-          ? todos.map((todo) => (
-              <Collapsible
-                key={`${todo.id}_${uuidv4()}`}
-                name={todo.title}
-                content={<p key={`${uuidv4()}_${todo.id}`}>{todo.title}</p>}
-                completed={todo.completed}
-                delete={() => this.props.onDeleteUserTodo(todo.id)}
-              />
-            ))
-          : []}
+        {userTodos.map((todo) => (
+          <Collapsible
+            key={`${todo.id}_${uuidv4()}`}
+            name={todo.title}
+            content={<p key={`${uuidv4()}_${todo.id}`}>{todo.title}</p>}
+            completed={todo.completed}
+            delete={() => this.props.onDeleteTodo(todo.id)}
+          />
+        ))}
       </div>
     );
     return (
@@ -130,21 +130,18 @@ export class Profile extends Component {
   }
 }
 
-const mapStateToProps = ({ user, error }) => ({
+const mapStateToProps = ({ user, error, post, todo }) => ({
     errors: error,
-    users: user.users,
-    posts: user.posts,
-    todos: user.todos,
-    currentUser: user.user,
+    user,
+    post,
+    todo,
   }),
   mapDispatchToProps = (dispatch) => ({
-    onReadUser: (userID) => dispatch(readUserInfo(userID)),
-    onFetchUserPosts: (userID) => dispatch(fetchUserPosts(userID)),
-    onFetchUserAlbums: (userID) => dispatch(fetchUserAlbums(userID)),
-    onFetchUserTodos: (userID) => dispatch(fetchUserTodos(userID)),
+    onFetchTodos: () => dispatch(fetchTodos()),
     onFetchPosts: () => dispatch(fetchPosts()),
+    onFetchUsers: () => dispatch(fetchUsers()),
     onDeletePost: (postID) => dispatch(deletePost(postID)),
-    onDeleteUserTodo: (userID) => dispatch(deleteUserTodo(userID)),
+    onDeleteTodo: (userID) => dispatch(deleteTodo(userID)),
   });
 
 Profile.propTypes = {
@@ -152,16 +149,14 @@ Profile.propTypes = {
   history: PropTypes.object,
   match: PropTypes.object,
   errors: PropTypes.object,
-  users: PropTypes.arrayOf(PropTypes.object),
-  posts: PropTypes.arrayOf(PropTypes.object),
-  todos: PropTypes.arrayOf(PropTypes.object),
-  onReadUser: PropTypes.func,
-  onFetchUserPosts: PropTypes.func,
-  onFetchUserAlbums: PropTypes.func,
-  onFetchUserTodos: PropTypes.func,
+  user: PropTypes.object,
+  post: PropTypes.object,
+  todo: PropTypes.object,
+  onFetchTodos: PropTypes.func,
   onDeletePost: PropTypes.func,
   onFetchPosts: PropTypes.func,
-  onDeleteUserTodo: PropTypes.func,
+  onFetchUsers: PropTypes.func,
+  onDeleteTodo: PropTypes.func,
 };
 
 export default connect(

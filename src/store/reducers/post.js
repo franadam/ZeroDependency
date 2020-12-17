@@ -1,43 +1,47 @@
+import { filterObjectById } from '../../utils/stateTransforation';
 import {
   FETCH_POSTS,
   POST_CREATE,
-  POST_READ,
   POST_UPDATE,
   POST_DELETE,
 } from '../actions/types';
 
 export const initialState = {
-  posts: [],
-  post: {},
+  byId: {},
+  allIds: [],
 };
 
 export const fetchPosts = (state, action) => {
   const posts = action.posts;
-  return Object.assign({}, { ...state, posts });
+  const byId = {};
+  const allIds = [];
+  posts.forEach((post) => {
+    byId[post.id] = post;
+    allIds.push(post.id);
+  });
+  return Object.assign({}, { ...state, byId, allIds });
 };
 
 export const createPost = (state, action) => {
   const post = action.post;
-  const posts = state.posts.slice();
-  posts.push(post);
-  return Object.assign({}, { ...state, posts });
-};
-
-export const readPost = (state, action) => {
-  const post = action.post;
-  return Object.assign({}, { ...state, id: post.id, post });
+  const byId = Object.assign({}, state.byId);
+  const allIds = state.allIds.slice();
+  allIds.push(post.id);
+  byId[action.post.id] = post;
+  return Object.assign({}, { ...state, allIds, byId });
 };
 
 export const updatePost = (state, action) => {
-  const posts = state.posts.filter((u) => u.id != action.postID);
+  const byId = filterObjectById(state.byId, action.post.id);
   const post = action.post;
-  posts.push(post);
-  return Object.assign({}, { ...state, posts });
+  byId[action.post.id] = post;
+  return Object.assign({}, { ...state, byId });
 };
 
 export const deletePost = (state, action) => {
-  const posts = state.posts.filter((u) => u.id != action.postID);
-  return Object.assign({}, { ...state, posts });
+  const allIds = state.allIds.filter((u) => u != action.postID);
+  const byId = filterObjectById(state.byId, action.postID);
+  return Object.assign({}, { ...state, allIds, byId });
 };
 
 const reducer = (state = initialState, action) => {
@@ -46,8 +50,6 @@ const reducer = (state = initialState, action) => {
       return fetchPosts(state, action);
     case POST_CREATE:
       return createPost(state, action);
-    case POST_READ:
-      return readPost(state, action);
     case POST_UPDATE:
       return updatePost(state, action);
     case POST_DELETE:

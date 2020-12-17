@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-import { createUserInfo, fetchUsers } from '../../store/actions';
+import { createUserInfo } from '../../store/actions';
 
 import validate from '../../utils/validateForm';
 
@@ -235,8 +235,6 @@ export class CreateProfile extends Component {
     },
   };
 
-  componentDidMount() {}
-
   createForm(formData) {
     const formElementsArray = [];
     for (const key in formData) {
@@ -370,19 +368,12 @@ export class CreateProfile extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  errors: state.error,
-  user: state.user.user,
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  onFetchUsers: (user) => dispatch(fetchUsers(user)),
   onCreateUserProfile: (user) => dispatch(createUserInfo(user)),
 });
 
 CreateProfile.propTypes = {
-  errors: PropTypes.object,
-  user: PropTypes.object,
+  error: PropTypes.object,
   history: PropTypes.object,
   match: PropTypes.object,
   userID: PropTypes.string,
@@ -390,7 +381,4 @@ CreateProfile.propTypes = {
   onFetchUsers: PropTypes.func,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(CreateProfile));
+export default connect(null, mapDispatchToProps)(withRouter(CreateProfile));

@@ -8,7 +8,7 @@ import formStyle from '../FormFiled/FormField.module.css';
 import classes from '../CreateProfile/CreateProfile.module.css';
 
 import validate from '../../utils/validateForm';
-import { fetchUsers, updateUserInfo, readUserInfo } from '../../store/actions';
+import { fetchUsers, updateUserInfo } from '../../store/actions';
 import Modal from '../../hoc/Modal/Modal';
 
 class EditProfile extends Component {
@@ -229,7 +229,6 @@ class EditProfile extends Component {
 
   componentDidMount() {
     this.props.onFetchUsers();
-    this.props.onReadUser(this.props.match.params.userID);
   }
 
   createForm(formData) {
@@ -336,8 +335,8 @@ class EditProfile extends Component {
     }
   }
   render() {
-    const { match, users } = this.props;
-    const user = users.find((user) => user.id == match.params.userID);
+    const { match, user: userState } = this.props;
+    const currentUser = userState.byId[match.params.userID];
     const form = (
       <form className={formStyle.form} onSubmit={this.handleSubmit}>
         {this.createForm(this.state.formData)}
@@ -354,9 +353,7 @@ class EditProfile extends Component {
     return (
       <div data-test="component-editProfile" className={classes.main}>
         <div className={classes.wrapper}>
-          <h1 className={classes.title}>
-            Edit {user ? user.name : ''} Profile
-          </h1>
+          <h1 className={classes.title}>Edit {currentUser.name} Profile</h1>
           <div className={classes.form}>{form}</div>
           <Modal>
             {this.state.formError ? (
@@ -372,14 +369,12 @@ class EditProfile extends Component {
 }
 
 const mapStateToProps = ({ error, user }) => ({
-  users: user.users,
-  currentUser: user.user,
+  user,
   error: error.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onFetchUsers: () => dispatch(fetchUsers()),
-  onReadUser: (id) => dispatch(readUserInfo(id)),
   onUpdateUser: (id, user) => dispatch(updateUserInfo(id, user)),
 });
 
@@ -389,9 +384,8 @@ EditProfile.propTypes = {
   match: PropTypes.object,
   currentUser: PropTypes.object,
   userID: PropTypes.string,
-  users: PropTypes.arrayOf(PropTypes.object),
+  user: PropTypes.object,
   onFetchUsers: PropTypes.func,
-  onReadUser: PropTypes.func,
   onUpdateUser: PropTypes.func,
 };
 

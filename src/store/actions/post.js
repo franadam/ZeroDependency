@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { errorPosts, deleteUserPostSc } from './';
+import { errorPosts } from './';
 
 import {
   FETCH_POSTS,
@@ -83,7 +83,6 @@ export const deletePost = (postID) => async (dispatch) => {
   try {
     await axios.delete(`https://jsonplaceholder.typicode.com/posts/${postID}`);
     dispatch(deletePostSc(postID));
-    dispatch(deleteUserPostSc(postID));
   } catch (error) {
     dispatch(errorPosts(error));
   }
