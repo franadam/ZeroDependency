@@ -52,28 +52,26 @@ export class Profile extends Component {
             </Link>
             <p className={classes.username}>@{currentUser.username}</p>
             <div className={classes.info}>
-              <div className={classes.info}>
-                {currentUser.address ? (
-                  <p>
-                    <FaMapMarkerAlt /> {currentUser.address.city}
-                  </p>
-                ) : null}
-                {currentUser.company ? (
-                  <p className={classes.company}>
-                    Company: {currentUser.company.name}
-                  </p>
-                ) : null}
-                <p className={classes.website}>
-                  <FaLink />{' '}
-                  <a
-                    href={currentUser.website}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {currentUser.website}
-                  </a>
+              {currentUser.address ? (
+                <p>
+                  <FaMapMarkerAlt /> {currentUser.address.city}
                 </p>
-              </div>
+              ) : null}
+              {currentUser.company ? (
+                <p className={classes.company}>
+                  Company: {currentUser.company.name}
+                </p>
+              ) : null}
+              <p className={classes.website}>
+                <FaLink />{' '}
+                <a
+                  href={currentUser.website}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {currentUser.website}
+                </a>
+              </p>
             </div>
           </>
         ) : null}

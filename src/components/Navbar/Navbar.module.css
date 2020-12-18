@@ -49,14 +49,12 @@
 }
 
 @media screen and (max-width: 500px) {
-  .wrapper,
-  .links {
-    justify-content: center;
-    flex-direction: column;
-    align-self: center;
-  }
+.main {
+  padding: 0;
+}
 
   .title {
     display: none;
   }
+
 }
